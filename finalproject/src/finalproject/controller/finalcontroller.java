@@ -71,6 +71,14 @@ public class finalcontroller{
     	model.addAttribute("mark", mark);
     	return "minsert";
 	}
+
+    @RequestMapping(value="/linsert", method=RequestMethod.GET)
+	public String linkInsertion(Model model) {
+    	
+    	Link link = new Link();
+    	model.addAttribute("link", link);
+    	return "linsert";
+	}
     
     @RequestMapping(value="/binsert", method=RequestMethod.POST)
     @Transactional
@@ -91,15 +99,16 @@ public class finalcontroller{
 	}
 
     @RequestMapping(value="/linsert", method=RequestMethod.POST)
-	public String linkInsertion(Model model) {
+	public String dolInsertion(@ModelAttribute("link") Link link, Model model) {
+    	LinkDao.saveOrUpdate(link);   
+		model.addAttribute("book_id", link.getBook_id());
     	
-    	Marks mark = new Marks();
-    	model.addAttribute("mark", mark);
     	return "redirect:bupdate";
 	}
     @RequestMapping(value="/bupdate")
     @Transactional
-	public String UpdateBForm(Model model, @RequestParam(value="book_id", defaultValue="") String book_id) {
+	public String UpdateBForm(@RequestParam(value="book_id", defaultValue="") String book_id
+			,Model model) {
 
 		Map<String, String> mconditions = new HashMap<String,String>();
     	Books book = BooksDao.get(Long.parseLong(book_id));

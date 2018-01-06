@@ -29,7 +29,7 @@
 				<td>*標籤</td>
 				<td>
 				<c:forEach var="mark" items="${marks}">
-					<a href="${pageContext.request.contextPath}/linsert" formmethod="post" >${mark.mark_Name}</a>
+					<a href="${pageContext.request.contextPath}/linsert?mark_id=${ mark.mark_id}" formmethod="post" >${mark.mark_Name}</a>
 				</c:forEach>
 				</td>
 			</tr>
