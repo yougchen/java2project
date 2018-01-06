@@ -35,7 +35,7 @@
 			</tr>
 		</table>
 		
-		<a href="#" role="button" data-onclick="spreadmark(${marks});return false;">sadasd書本新增標籤……</a>
+		<a href="#" role="button" data-onclick="spreadmark(${marks});return false;">書本新增標籤……</a>
 		<button type="submit" formaction="${pageContext.request.contextPath}/binsert" formmethod="post" onclick="return doConfirm()">存檔</button>
 
 		<button	type="button" onclick="goBack()">回上一頁</button>
