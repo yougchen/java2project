@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import finalproject.dao.LinkDao;
+import finalproject.model.Books;
 import finalproject.model.Link;
 import finalproject.model.Marks;
 
@@ -26,6 +27,12 @@ public class implLinkDao implements LinkDao {
 	public Link get(long mark_id,long book_id) {
 		return (Link) sessionFactory.getCurrentSession().get(Link.class, mark_id);
 	}
+	
+	@Override
+	public void saveOrUpdate(Link link) {
+		sessionFactory.getCurrentSession().saveOrUpdate(link);
+	}
+
 
 	@Override
 	public void delete(Link link) {
