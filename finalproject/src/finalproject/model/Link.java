@@ -7,19 +7,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 @Entity
 @Table(name="link")
+@IdClass(LinkPK.class)
 public class Link implements Serializable{
 	@Id
 	@Column
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long mark_id;
 
 	@Id
 	@Column
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long book_id;
 	
 	public long getMark_id() {
@@ -37,4 +40,5 @@ public class Link implements Serializable{
 	public void setBook_id(long book_id) {
 		this.book_id = book_id;
 	}
+
 }

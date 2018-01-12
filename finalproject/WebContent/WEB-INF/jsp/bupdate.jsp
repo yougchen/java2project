@@ -12,6 +12,7 @@
 <body>
 	<form:form name="form" modelAttribute="book">
 		<table class="frame">	
+		
 			<form:input type="hidden" name="book_id" path="book_id"/>
 			<tr>
 				<td>*書籍名稱</td>
@@ -29,7 +30,7 @@
 				<td>*標籤</td>
 				<td>
 				<c:forEach var="mark" items="${marks}">
-					<a href="${pageContext.request.contextPath}/linsert?mark_id=${ mark.mark_id}" formmethod="post" >${mark.mark_Name}</a>
+					<a href="${pageContext.request.contextPath}/linsert?book_id=17&mark_id=${mark.mark_id}" formmethod="get" >${mark.mark_Name}</a>
 				</c:forEach>
 				</td>
 			</tr>

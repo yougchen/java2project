@@ -2,6 +2,7 @@ package finalproject.controller;
 
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,6 @@ import finalproject.model.Books;
 
 import finalproject.dao.MarksDao;
 import finalproject.model.Marks;
-
 import finalproject.dao.LinkDao;
 import finalproject.model.Link;
 
@@ -55,29 +55,13 @@ public class finalcontroller{
     public String indexview() {
     	return "index";
 	}
-   
+   //書本管理相關的URL
     @RequestMapping(value="/binsert", method=RequestMethod.GET)
 	public String booksInsertion(Model model) {
     	
     	Books book = new Books();
     	model.addAttribute("book", book);
     	return "binsert";
-	}
-    
-    @RequestMapping(value="/minsert", method=RequestMethod.GET)
-	public String marksInsertion(Model model) {
-    	
-    	Marks mark = new Marks();
-    	model.addAttribute("mark", mark);
-    	return "minsert";
-	}
-
-    @RequestMapping(value="/linsert", method=RequestMethod.GET)
-	public String linkInsertion(Model model) {
-    	
-    	Link link = new Link();
-    	model.addAttribute("link", link);
-    	return "linsert";
 	}
     
     @RequestMapping(value="/binsert", method=RequestMethod.POST)
@@ -98,13 +82,6 @@ public class finalcontroller{
     	return "redirect:blist";
 	}
 
-    @RequestMapping(value="/linsert", method=RequestMethod.POST)
-	public String dolInsertion(@ModelAttribute("link") Link link, Model model) {
-    	LinkDao.saveOrUpdate(link);   
-		model.addAttribute("book_id", link.getBook_id());
-    	
-    	return "redirect:bupdate";
-	}
     @RequestMapping(value="/bupdate")
     @Transactional
 	public String UpdateBForm(@RequestParam(value="book_id", defaultValue="") String book_id
@@ -112,11 +89,15 @@ public class finalcontroller{
 
 		Map<String, String> mconditions = new HashMap<String,String>();
     	Books book = BooksDao.get(Long.parseLong(book_id));
+
+		Map<String, String> lconditions = new HashMap<String,String>();
+		lconditions.put("book_id", book_id);
+		
+
     	model.addAttribute("book", book);
 		model.addAttribute("marks", MarksDao.search(mconditions));
     	return "bupdate";
 	}
-
     @RequestMapping(value="/blist")
 	@Transactional
 	public String dobUpdate(@RequestParam(value="book_id", defaultValue="") String book_id,
@@ -145,7 +126,7 @@ public class finalcontroller{
 
 		Map<String, String> mconditions = new HashMap<String,String>();
 		model.addAttribute("marks", MarksDao.search(mconditions));
-		
+
 		model.addAttribute("book_Name", book_Name);
 		model.addAttribute("writer_Name", writer_Name);
 		model.addAttribute("book_id", book_id);
@@ -163,18 +144,70 @@ public class finalcontroller{
 				
 		return "redirect:bquery";
 	}
-/*
+
+	//書本類型管理相關的URL
+    @RequestMapping(value="/minsert", method=RequestMethod.GET)
+	public String marksInsertion(Model model) {
+    	
+    	Marks mark = new Marks();
+    	model.addAttribute("mark", mark);
+    	return "minsert";
+	}
+    
+    @RequestMapping(value="/mupdate")
+    @Transactional
+	public String UpdateMForm(@RequestParam(value="mark_id", defaultValue="") String mark_id
+			,Model model) {
+
+    	Marks mark = MarksDao.get(Long.parseLong(mark_id));
+    	
+    	model.addAttribute("mark", mark);
+    	return "mupdate";
+	}
+    
+    @RequestMapping(value="/mlist")
+	@Transactional
+	public String dobUpdate(@RequestParam(value="mark_id", defaultValue="") String mark_id,
+			Model model) {
+
+		model.addAttribute("mark_id", mark_id);
+
+		Map<String, String> mconditions = new HashMap<String,String>();
+		model.addAttribute("marks", MarksDao.search(mconditions));
+		
+    	return "MBrowse";
+	}
+
 	@RequestMapping(value="/mdelete")
 	@Transactional
 	public String doMDeletion(
-			@RequestParam(value="book_id", defaultValue="") String book_id,
+			@RequestParam(value="mark_id", defaultValue="") String mark_id,
 			Model model, HttpServletResponse response) {
 		
-		BooksDao.delete(Long.parseLong(book_id));
+		MarksDao.delete(Long.parseLong(mark_id));
 				
-		return "redirect:bquery";
+		return "redirect:mlist";
 	}
-*/
+
+	//書本與標籤連結管理相關的URL
+    @RequestMapping(value="/linsert", method=RequestMethod.GET)
+    @Transactional
+	public String dolinkInsertion(@RequestParam(value="book_id", defaultValue="") String book_id,
+			@RequestParam(value="mark_id", defaultValue="") String mark_id,
+			Model model) {
+    	
+    	Link link = new Link();
+
+    	link.setMark_id(Long.parseLong(mark_id));
+    	link.setBook_id(Long.parseLong(book_id));
+        
+    	LinkDao.saveOrUpdate(link); 
+    	
+		model.addAttribute("book_id", link.getBook_id());
+    	
+    	return "redirect:bupdate";
+	}
+
 	
 
 }

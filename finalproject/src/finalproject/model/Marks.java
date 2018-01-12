@@ -1,10 +1,14 @@
 package finalproject.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -44,6 +48,5 @@ public class Marks {
 	public void setMark_information(String mark_information) {
 		this.mark_information = mark_information;
 	}
-
 
 }

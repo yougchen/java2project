@@ -25,7 +25,7 @@
 			</tr>
 		</table>
 		<button type="submit" formaction="${pageContext.request.contextPath}/binsert" formmethod="get">新增</button>
-		<button type="submit" formaction="${pageContext.request.contextPath}/bquery" formmethod="get">查詢</button>
+		<button type="submit" formaction="${pageContext.request.contextPath}/bquery" formmethod="post">查詢</button>
 		<button type="reset">清除</button>
 	</form:form>
 </body>

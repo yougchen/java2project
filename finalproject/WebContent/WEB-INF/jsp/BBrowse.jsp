@@ -15,11 +15,12 @@
 </head>
 <body >
 		<a href="${pageContext.request.contextPath}/minsert">新增標籤</a>
-		<a href="${pageContext.request.contextPath}/mupdate"/>修改標籤</a>
+		<a href="${pageContext.request.contextPath}/mlist"/>修改標籤</a>
 		<br/>
+			書本類型
 			<c:forEach var="mark" items="${marks}">
 					
-					<a href="${pageContext.request.contextPath}/bquery">
+					<a href="${pageContext.request.contextPath}/bquery?mark_id=${mark.mark_id}">
 						<c:if test = "${mark.mark_id == mark_id}">
 							<font color="red">
 						</c:if>
@@ -44,7 +45,7 @@
 			</tr>
 		</table>
 		<button type="submit" formaction="${pageContext.request.contextPath}/binsert" formmethod="get">新增</button>
-		<button type="submit" formaction="${pageContext.request.contextPath}/bquery"  formmethod="get">查詢</button>
+		<button type="submit" formaction="${pageContext.request.contextPath}/bquery"  formmethod="post">查詢</button>
 		<button type="reset">清除</button>
 
 		<table class="frame">
