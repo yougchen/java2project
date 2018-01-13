@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import finalproject.dao.MarksDao;
+import finalproject.model.Books;
 import finalproject.model.Marks;
 
 @Component
@@ -55,6 +58,19 @@ public class implMarksDao implements MarksDao {
 		criteria.addOrder(Order.asc("mark_id"));		
 		
 		return criteria.list();
+	}
+
+	@Override
+	public List<Marks> bsearch(List<Long> mark_ids) {
+		Session session=sessionFactory.getCurrentSession();
+		List<Long> ids = mark_ids;
+		
+		Query query =  session.createQuery("FROM Marks item WHERE item.id IN (:ids)");
+		query.setParameterList("ids", ids);
+		
+		List<Marks> marks = query.list();
+		
+		return  marks;
 	}
 	
 	private String makeLikeString(String str) {

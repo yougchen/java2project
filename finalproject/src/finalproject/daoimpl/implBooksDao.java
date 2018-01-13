@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
 import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -57,12 +60,26 @@ public class implBooksDao implements BooksDao {
 		return criteria.list();
 	}
 	
+	@Override
+	public List<Books> msearch(List<Long> book_ids) {
+		Session session=sessionFactory.getCurrentSession();
+		List<Long> ids = book_ids;
+		
+		Query query =  session.createQuery("FROM Books item WHERE item.id IN (:ids)");
+		query.setParameterList("ids", ids);
+		
+		List<Books> books = query.list();
+		return  books;
+	}
+	
+	
 	private String makeLikeString(String str) {
 		String retVal = str.replace("%", "");
 		retVal = "%" + retVal + "%";
 		
 		return retVal;
 	}
+
 
 
 }

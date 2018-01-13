@@ -12,6 +12,9 @@ public interface LinkDao {
 	void saveOrUpdate(Link link);
 	void delete(Link link);
 	void delete(long mark_id,long book_id);
-	List<Link> search(Map<String,String> conditions);
+	List<Long> bsearch(long book_id);
+	List<Long> msearch(long mark_id);
+	void b_delete(long book_id);
+	void m_delete(long mark_id);
 	
 }

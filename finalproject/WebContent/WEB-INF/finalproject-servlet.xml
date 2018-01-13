@@ -19,7 +19,7 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd
 http://www.springframework.org/schema/util 
 http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 	<!-- Scanning enablement on package -->
-	<context:component-scan base-package="finalproject.controller, finalproject.daoimpl, finalproject.domain" />
+	<context:component-scan base-package="finalproject.controller, finalproject.daoimpl,finalproject.util, finalproject.domain" />
 	<aop:aspectj-autoproxy/>
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />

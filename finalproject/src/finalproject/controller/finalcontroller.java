@@ -1,6 +1,7 @@
 package finalproject.controller;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -88,14 +89,16 @@ public class finalcontroller{
 			,Model model) {
 
 		Map<String, String> mconditions = new HashMap<String,String>();
+		
     	Books book = BooksDao.get(Long.parseLong(book_id));
 
-		Map<String, String> lconditions = new HashMap<String,String>();
-		lconditions.put("book_id", book_id);
-		
-
+		//model.addAttribute("marks", MarksDao.bsearch(LinkDao.bsearch(Long.parseLong(book_id))));
+    	List<Long> listA = LinkDao.bsearch(Long.parseLong(book_id));
+		if(listA!=null && !listA.isEmpty()){
+    		model.addAttribute("marks", MarksDao.bsearch(LinkDao.bsearch(Long.parseLong(book_id))));
+    	}
     	model.addAttribute("book", book);
-		model.addAttribute("marks", MarksDao.search(mconditions));
+		model.addAttribute("addmarks", MarksDao.search(mconditions));
     	return "bupdate";
 	}
     @RequestMapping(value="/blist")
@@ -133,6 +136,23 @@ public class finalcontroller{
 		model.addAttribute("mark_id", mark_id);
 		return "BBrowse";
 	}
+
+	@RequestMapping(value="/marksearchbquery")
+	@Transactional
+	public String doBQuery(
+			@RequestParam(value="mark_id", defaultValue="") String mark_id,
+			Model model) {
+
+    	List<Long> listA = LinkDao.msearch(Long.parseLong(mark_id));
+		if(listA!=null && !listA.isEmpty()){
+		model.addAttribute("books", BooksDao.msearch(LinkDao.msearch(Long.parseLong(mark_id))));
+		}
+		
+		Map<String, String> mconditions = new HashMap<String,String>();
+		model.addAttribute("marks", MarksDao.search(mconditions));
+
+		return "BBrowse";
+	}
 	
 	@RequestMapping(value="/bdelete")
 	@Transactional
@@ -141,6 +161,7 @@ public class finalcontroller{
 			Model model, HttpServletResponse response) {
 		
 		BooksDao.delete(Long.parseLong(book_id));
+		LinkDao.b_delete(Long.parseLong(book_id));
 				
 		return "redirect:bquery";
 	}
@@ -185,6 +206,7 @@ public class finalcontroller{
 			Model model, HttpServletResponse response) {
 		
 		MarksDao.delete(Long.parseLong(mark_id));
+		LinkDao.m_delete(Long.parseLong(mark_id));
 				
 		return "redirect:mlist";
 	}
@@ -208,6 +230,15 @@ public class finalcontroller{
     	return "redirect:bupdate";
 	}
 
-	
+	@RequestMapping(value="/ldelete")
+	@Transactional
+	public String doMDeletion(@RequestParam(value="book_id", defaultValue="") String book_id,
+			@RequestParam(value="mark_id", defaultValue="") String mark_id,
+			Model model, HttpServletResponse response) {
+		
+		LinkDao.delete(Long.parseLong(book_id),Long.parseLong(mark_id));
+				
+		return "redirect:mlist";
+	}
 
 }

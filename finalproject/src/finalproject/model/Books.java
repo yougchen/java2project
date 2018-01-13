@@ -1,6 +1,7 @@
 package finalproject.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.JoinColumn;
@@ -29,7 +30,7 @@ public class Books {
 	
 	@Column(length=300)
 	private String book_information;
-
+	
 	public long getBook_id() {
 		return book_id;
 	}
@@ -61,6 +62,6 @@ public class Books {
 	public void setBook_information(String book_information) {
 		this.book_information = book_information;
 	}
-
+	
 
 }

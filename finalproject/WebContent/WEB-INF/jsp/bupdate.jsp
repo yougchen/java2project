@@ -10,9 +10,9 @@
 <link href="<c:url value="/resources/css/mystyle.css" />" rel="stylesheet" type="text/css">
 </head>
 <body>
+${book_id}
 	<form:form name="form" modelAttribute="book">
 		<table class="frame">	
-		
 			<form:input type="hidden" name="book_id" path="book_id"/>
 			<tr>
 				<td>*書籍名稱</td>
@@ -30,13 +30,20 @@
 				<td>*標籤</td>
 				<td>
 				<c:forEach var="mark" items="${marks}">
-					<a href="${pageContext.request.contextPath}/linsert?book_id=17&mark_id=${mark.mark_id}" formmethod="get" >${mark.mark_Name}</a>
+						${mark.mark_Name}
+				</c:forEach>
+				</td>
+			</tr>
+			<tr>
+				<td>*新增標籤</td>
+				<td>
+				<c:forEach var="mark" items="${addmarks}">
+					<a href="${pageContext.request.contextPath}/linsert?book_id=${book.book_id}&mark_id=${mark.mark_id}" formmethod="get" >${mark.mark_Name}</a>
 				</c:forEach>
 				</td>
 			</tr>
 		</table>
 		
-		<a href="#" role="button" data-onclick="spreadmark(${marks});return false;">書本新增標籤……</a>
 		<button type="submit" formaction="${pageContext.request.contextPath}/binsert" formmethod="post" onclick="return doConfirm()">存檔</button>
 
 		<button	type="button" onclick="goBack()">回上一頁</button>

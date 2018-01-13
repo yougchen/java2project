@@ -11,6 +11,13 @@
 <link href="<c:url value="/resources/css/mystyle.css" />" rel="stylesheet" type="text/css">
 <title>客戶資料瀏覽</title>
   <script type="application/javascript">
+	 function doReset(){  
+	  for(i=0;i<document.all.tags("input").length;i++){  
+	      if(document.all.tags("input")[i].type=="text"){  
+	          document.all.tags("input")[i].value="";  
+	      }  
+	  }  
+	}  
 	</script>	
 </head>
 <body >
@@ -20,7 +27,7 @@
 			書本類型
 			<c:forEach var="mark" items="${marks}">
 					
-					<a href="${pageContext.request.contextPath}/bquery?mark_id=${mark.mark_id}">
+					<a href="${pageContext.request.contextPath}/marksearchbquery?mark_id=${mark.mark_id}">
 						<c:if test = "${mark.mark_id == mark_id}">
 							<font color="red">
 						</c:if>
@@ -46,8 +53,7 @@
 		</table>
 		<button type="submit" formaction="${pageContext.request.contextPath}/binsert" formmethod="get">新增</button>
 		<button type="submit" formaction="${pageContext.request.contextPath}/bquery"  formmethod="post">查詢</button>
-		<button type="reset">清除</button>
-
+		<button type="button" onClick="doReset()">清除</button> 
 		<table class="frame">
 			<tr>
 				<th></th>

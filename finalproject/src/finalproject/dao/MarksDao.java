@@ -11,5 +11,6 @@ public interface MarksDao {
 	void delete(Marks mark);
 	void delete(long mark_id);
 	List<Marks> search(Map<String,String> conditions);
+	List<Marks> bsearch(List<Long> mark_ids);
 	
 }

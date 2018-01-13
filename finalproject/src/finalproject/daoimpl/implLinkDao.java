@@ -1,6 +1,7 @@
 package finalproject.daoimpl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -51,23 +52,71 @@ public class implLinkDao implements LinkDao {
 	}
 
 	@Override
-	public List<Link> search(Map<String,String> conditions){
+	public List<Long> bsearch(long book_id){
 		
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Link.class);
-		for (Map.Entry<String, String> entry : conditions.entrySet()) {
-			criteria.add(Restrictions.like(entry.getKey(), makeLikeString(entry.getValue())));
-		}
-		criteria.addOrder(Order.asc("mark_id"));		
-		
-		return criteria.list();
+
+		criteria.add(Restrictions.like("book_id", book_id));
+		List links = criteria.list();
+
+		List<Long> listA = new ArrayList();
+		for(Iterator it = links.iterator(); it.hasNext(); ) {
+		    Link link = (Link) it.next();
+		    listA.add(link.getMark_id());
+		}	
+
+		return listA;
 		
 	}
 	
-	private String makeLikeString(String str) {
-		String retVal = str.replace("%", "");
-		retVal = "%" + retVal + "%";
+	@Override
+	public List<Long> msearch(long mark_id){
 		
-		return retVal;
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Link.class);
+
+		criteria.add(Restrictions.like("mark_id", mark_id));
+		List links = criteria.list();
+
+		List<Long> listA = new ArrayList();
+		for(Iterator it = links.iterator(); it.hasNext(); ) {
+		    Link link = (Link) it.next();
+		    listA.add(link.getBook_id());
+		}	
+
+		return listA;
+		
+	}
+
+	@Override
+	public void b_delete(long book_id) {
+
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Link.class);
+		//取link where book_id = $book_id
+		criteria.add(Restrictions.like("book_id", book_id));
+		List links = criteria.list();
+		
+		for(Iterator it = links.iterator(); it.hasNext(); ) {
+			//刪除
+		    Link link = (Link) it.next();
+			delete(link);
+		}	
+	}	
+
+	@Override
+	public void m_delete(long mark_id) {
+
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Link.class);
+		//取link where mark_id = $mark_id
+		criteria.add(Restrictions.like("mark_id", mark_id));
+		List links = criteria.list();
+
+		for(Iterator it = links.iterator(); it.hasNext(); ) {
+			//刪除
+		    Link link = (Link) it.next();
+			delete(link);
+		}	
+
+
 	}
 
 }
