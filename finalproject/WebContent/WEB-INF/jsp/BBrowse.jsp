@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<c:url value="/resources/css/mystyle.css" />" rel="stylesheet" type="text/css">
-<title>客戶資料瀏覽</title>
+<title>小說瀏覽</title>
   <script type="application/javascript">
 	 function doReset(){  
 	  for(i=0;i<document.all.tags("input").length;i++){  
@@ -21,10 +21,13 @@
 	</script>	
 </head>
 <body >
-		<a href="${pageContext.request.contextPath}/minsert">新增標籤</a>
-		<a href="${pageContext.request.contextPath}/mlist"/>修改標籤</a>
+		<div class="first">
+			<h1><a href="${pageContext.request.contextPath}/minsert?url=books">新增標籤</a></h1>
+			<h1><a href="${pageContext.request.contextPath}/mlist"/>修改標籤</a></h1>
+		</div>
 		<br/>
-			書本類型
+			<h2>小說類型</h2>
+			<div class="type">
 			<c:forEach var="mark" items="${marks}">
 					
 					<a href="${pageContext.request.contextPath}/marksearchbquery?mark_id=${mark.mark_id}">
@@ -39,6 +42,7 @@
 						</c:if>
 					</a>
 			</c:forEach>
+			</div>
 
 	<form:form id="form"  modelAttribute="book" accept-charset="utf-8">
 		<table class="frame">
@@ -54,7 +58,7 @@
 		<button type="submit" formaction="${pageContext.request.contextPath}/binsert" formmethod="get">新增</button>
 		<button type="submit" formaction="${pageContext.request.contextPath}/bquery"  formmethod="post">查詢</button>
 		<button type="button" onClick="doReset()">清除</button> 
-		<table class="frame">
+		<table class="table">
 			<tr>
 				<th></th>
 				<th></th>

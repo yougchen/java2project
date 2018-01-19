@@ -1,21 +1,92 @@
 @CHARSET "UTF-8";
 
-h1 {
+body {
+	background-image:url("../images/header.png");
+    background-repeat: no-repeat;
+    background-position: top;
+    margin-top: 200px;
+}
+h1.first {
 	color: blue;
-	font-size: 2em;
+	font-size: 20px;
+}
+.first a{
 	text-align: center;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    font-size: 15px; 
+    font-family: 微軟正黑體;
+    padding: 0px 10px 0px 10px;
+	font-size: 20px;
+	marign: 0px 300px 0px 300px;
+}
+/*設定還沒有瀏覽過的連結*/
+.first a:link{
+    color: white;
+}
+/* 滑鼠移至連結 */
+.first a:hover
+{
+    color: #00FF00;
+}
+/* 選擇的連結 */
+.first a:active
+{
+   color: #0000FF;
 }
 
 h2 {
-	color: blue;
-	font-size: 1.5em;
+	text-align: center;
+    background-color : black;
+    text-shadow : rgba(255,255,255,0.5) 0 5px 6px, rgba(255,255,255,0.2) 1px 3px 3px;
+	letter-spacing: 0.04em;
+}
+.type{
+	
 	text-align: center;
 }
-
-p {
-	color: red;
+.type a{
+	
+	text-align: center;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    font-size: 15px; 
+    font-family: 微軟正黑體;
+    padding: 0px 10px 0px 10px;
+	font-size: 20px;
+}
+/*設定還沒有瀏覽過的連結*/
+.type a:link{
+    color: white;
+}
+/* 滑鼠移至連結 */
+.type a:hover
+{
+    color: #00FF00;
+}
+/* 選擇的連結 */
+.type a:active
+{
+   color: #0000FF;
 }
 
+/* 未連結 */
+a:link
+{
+    color: #000000;
+}
+/* 滑鼠移至連結 */
+a:hover
+{
+    color: #00FF00;
+}
+/* 選擇的連結 */
+a:active
+{
+   color: #0000FF;
+}
 form {
 	text-align: center;
 }
@@ -24,25 +95,33 @@ table.frame {
 	margin: 20px auto;
 	border: 2px solid black;
 }
-
+.table{
+	text-align: center;
+}
+table.table{
+    border-collapse: collapse;
+    width: 80%;
+	margin: 20px auto;
+	border: 2px solid black;
+}
+.table a{
+	text-align: center;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    font-size: 15px; 
+    font-family: 微軟正黑體;
+    padding: 0px 10px 0px 10px;
+}
 td,th {
 	padding: 10px;
+    font-size: 15px; 
 	border: 1px solid black;
 	text-align: left;
 }
 
-.headrow {
-	color: black;
-	background-color: #0099CC;
-	text-align: center;
-}
-
-.evenrow {
-	color: black;
-	background-color: #00FFCC;
-}
-
-td.subtitle {
-	color: #660033;
+.error {
+	color: #ff0000;
 	font-size: 20px;
+	background-color: #400080;
 }

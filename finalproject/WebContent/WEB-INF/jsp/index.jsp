@@ -6,11 +6,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>書籍與標籤管理</title>
+<title>小說與標籤管理</title>
 <link href="<c:url value="/resources/css/mystyle.css" />" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>書籍與標籤管理</h1>
+<h2>小說與標籤管理</h2>
 <br/>
 	<form:form id="main" accept-charset="utf-8">
 		<table class="frame">

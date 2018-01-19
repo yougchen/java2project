@@ -6,21 +6,29 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>新增客戶資料</title>
+<title>新增標籤資料</title>
 <link href="<c:url value="/resources/css/mystyle.css" />" rel="stylesheet" type="text/css">
 </head>
 <body>
+	<br/>
+	<br/>
+	<h2>新增小說標籤</h2>
 	<form:form name="form" modelAttribute="mark">
 		<table class="frame">	
 			<form:input type="hidden" name="mark_id" path="mark_id"/>
 			<tr>
 				<td>*書籍的標籤名稱</td>
-				<td><form:input type="text" path="mark_Name"/></td>
+				<td>
+					<form:input type="text" path="mark_Name"/>
+				    <form:errors path="mark_Name" cssClass="error"></form:errors>
+				</td>
 			</tr>
 			<tr>
 				<td>*標籤特色</td>
-				<td><form:input type="text" name="mark_information" class="txt" path="mark_information"/></td>
-			</tr>
+				<td>
+					<form:textarea rows="4" cols="30" name="mark_information" class="txt" path="mark_information"/>
+				    <form:errors path="mark_information" cssClass="error"></form:errors>
+				</td></tr>
 		</table>
 		<button type="submit" formaction="${pageContext.request.contextPath}/minsert" formmethod="post" onclick="return doConfirm()">存檔</button>
 		<button	type="button" onclick="goBack()">回上一頁</button>
